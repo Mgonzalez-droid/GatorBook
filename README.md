@@ -1,6 +1,9 @@
 # Gator Book
 ## Authors:
-- Michel Gonzalez
-- Team member one enter name here
-- Team member two enter name here
-- Team member three enter name here
+- Product Manager: Michel Gonzalez
+- Scrum Master: Huan (Nicholas) Tran
+- Development Team Member: Nam (Alex) Tran
+- Development Team Member: Alyssa La Salle
+
+## Description:
+GatorBook is an online social media platform built by Gators, for Gators.  It is meant to offer a platform for UF students to connect for school related topics, or just to form social connections.
