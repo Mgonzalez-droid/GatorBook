@@ -7,3 +7,8 @@
 
 ## Description:
 GatorBook is an online social media platform built by Gators, for Gators.  It is meant to offer a platform for UF students to connect for school related topics, or just to form social connections.
+
+## Required Tools:
+- MySQL server (necessary for database connection)
+- MySQL workbench (for any changes that need to be made to database at runtime)
+- nodejs
