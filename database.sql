@@ -6,4 +6,4 @@ CREATE TABLE gatorbookdb.user(
     PRIMARY KEY(username)
 );
 
-INSERT INTO gatorbookdb.users(username, password) values ("root", "root");
+INSERT INTO gatorbookdb.user(username, password) values ("root", "root");
