@@ -6,4 +6,6 @@ CREATE TABLE gatorbookdb.user(
     PRIMARY KEY(username)
 );
 
-INSERT INTO gatorbookdb.user(username, password) values ("root", "root");
+INSERT INTO gatorbookdb.user(username, password) values ("root", "password");
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+flush privileges;
