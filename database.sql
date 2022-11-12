@@ -12,11 +12,12 @@ flush privileges;
 
 /*Gatorbook groups */
 
+USE gatorbookdb;
 
-CREATE TABLE Members (
+/*
+CREATE TABLE groupListing (
 	Memberid int NOT NULL AUTO_INCREMENT,
-	FirstName VARCHAR(255),
-    LastName VARCHAR(255),
+	GroupName VARCHAR(255),
 	PRIMARY KEY (Memberid)
 );
-
+*/
