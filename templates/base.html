@@ -1,0 +1,62 @@
+<html>
+
+<head> 
+    <link href="../static/css/layout.css" rel = "stylesheet" />
+    <meta charset="UFT-8">
+    <meta name = "viewport" content = "width = device-width initial-scale = 1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Gatorbook Navbar</title>
+    {% block head %}{% endblock %}
+</head>
+
+
+<body> 
+    <body> <!--Try <div> tags instead-->
+        <!-- Header -->
+        <header id="header">
+            <center>
+                <h1>GatorBook</h1>
+            </center>
+        </header>
+    </body>
+<div>
+    <!-- Navbar -->
+    <nav>
+        <div class = "nav_left">
+            <div class="nav_search">
+                <i class  = 'material-icons'>search</i>
+                <input type = "text" placeholder = "Search Gatorbook">
+            </div>
+        </div>
+        <div class = "nav_mid">
+            <a href = "{{ url_for('index') }}" class = "icon">
+                <i class = "material-icons">home</i>
+            </a>
+        <a href = "{{ url_for('groups') }}" class = "icon">
+                <i class = "material-icons">people-outline</i>
+
+            </a>
+        </div>
+        <div class= "nav_right">
+            <div class="buttons">
+                <a href="{{ url_for('messenger') }}"> 
+                    <i class="material-icons">message</i>
+                </a>
+
+                <a href="{{ url_for('notifications') }}">
+                    <i class="material-icons">notifications</i>
+                </a>
+            </div>
+        </div>
+    </nav>
+</div>
+{% block body %}{% endblock %}
+</body>
+
+
+<footer id="footer">
+    <p>Developed by: Michel Gonzalez, Huan (Nicholas) Tran, Nam (Alex) Tran, Alyssa La Salle<br>
+</footer>
+
+</html>
