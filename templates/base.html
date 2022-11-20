@@ -12,14 +12,20 @@
 
 
 <body> 
-    <body> <!--Try <div> tags instead-->
+    <div> 
         <!-- Header -->
         <header id="header">
             <center>
                 <h1>GatorBook</h1>
             </center>
         </header>
-    </body>
+    </div>
+    <div id="login_bar">
+        <a href = "{{ url_for('login') }}">Login | </a>
+        <a href = "{{ url_for('login') }}">Logout | </a>
+        <a href = "{{ url_for('createUser') }}">Create User | </a>
+        <a>{{username}}</a>
+    </div>
 <div>
     <!-- Navbar -->
     <nav>

@@ -5,6 +5,22 @@
     font-family: Roboto;
 }
 
+div.login_bar {
+    text-align: right;
+    background: #24baff;
+}
+
+div.login {
+    padding: 60px;
+    text-align: center;
+}
+
+div.createUser {
+    padding: 60px;
+    text-align: center;
+}
+
+
 header {
     padding: 60px;
     text-align: center;
