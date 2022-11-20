@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="login">
+    <h1>Login</h1>
+    <h2>{{loginMsg}}</h2>
+    <form action="{{ url_for('loginAuth') }}" method="post">
+        <label for="username"></label>
+            <input type="text" name="username" placeholder="Username" id="username" required>
+        <label for="password"></label>
+            <input type="password" name="password" placeholder="Password" id="password" required>
+        <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}
