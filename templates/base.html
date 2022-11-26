@@ -52,6 +52,12 @@
 
                 <a href="{{ url_for('notifications') }}">
                     <i class="material-icons">notifications</i>
+                    {% set new_messages = current_user.new_messages() %}
+                    <span id="message_count" class="badge"
+                          style="visibility: {% if new_messages %}visible
+                                             {% else %}hidden {% endif %};">
+                        {{ new_messages }}
+                    </span>
                 </a>
             </div>
         </div>
@@ -59,6 +65,16 @@
 </div>
 {% block body %}{% endblock %}
 </body>
+
+{% block scripts %}
+    <script>
+        // ...
+        function set_message_count(n) {
+            $('#message_count').text(n);
+            $('#message_count').css('visibility', n ? 'visible' : 'hidden');
+        }
+    </script>
+{% endblock %}
 
 
 <footer id="footer">

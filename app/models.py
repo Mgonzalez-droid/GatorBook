@@ -4,10 +4,39 @@ from app import db
 import json
 from time import time
 
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), index=True, unique=True)
+    email = db.Column(db.String(120), index=True, unique=True)
+    password = db.Column(db.String(128))
+
+    #get relationships with message model
+    messages_sent = db.relationship('Message',
+                                    foreign_keys='Message.sender_id',
+                                    backref='author', lazy='dynamic')
+    messages_received = db.relationship('Message',
+                                        foreign_keys='Message.recipient_id',
+                                        backref='recipient', lazy='dynamic')
+    last_message_read_time = db.Column(db.DateTime)
+
+
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
+    
+    
+    def new_messages(self):
+        last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
+        return Message.query.filter_by(recipient=self).filter(
+            Message.timestamp > last_read_time).count()
+
 class Message(db.Model): 
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(64), index = True, unique = True)
-    password = db.Column (db.String(128))
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    body = db.Column(db.String(140))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.estnow)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
