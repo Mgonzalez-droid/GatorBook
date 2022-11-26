@@ -31,6 +31,12 @@ class User(db.Model):
         return Message.query.filter_by(recipient=self).filter(
             Message.timestamp > last_read_time).count()
 
+    def add_notification(self, name, data):
+        self.notifications.filter_by(name=name).delete()
+        n = Notification(name=name, payload_json=json.dumps(data), user=self)
+        db.session.add(n)
+        return n
+
 class Message(db.Model): 
     id = db.Column(db.Integer, primary_key = True)
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
