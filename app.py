@@ -18,91 +18,54 @@ isLoggedIn = False
 #cur =
 #conn
 
+#constants for clean code
+NOT_LOGGED_IN = "Not Logged in"
+
+INDEX_PAGE = "index.html"
+LOGIN_PAGE = "login.html"
+CREATE_USER_PAGE = "create_user.html"
+MESSENGER_PAGE = "messenger.html"
+NOTIFICATION_PAGE = "notifications.html"
+SEARCH_PAGE = "search.html"
+GROUPS_PAGE = "groups.html"
+
 # ____ W E B P A G E S ____
 app = Flask(__name__)
 
 @app.route('/')
-def index():
+def Index():
     
-    username = 'Not Logged in'
-    resp = make_response(render_template('index.html', username = username))
+    username = NOT_LOGGED_IN
+    resp = make_response(render_template(INDEX_PAGE, username = username))
     resp.set_cookie('username', username)
 
     return resp
 
 @app.route('/Messenger')
-def messenger():
-    #query = "SELECT TITLE FROM MOVIE"
-
-    #get cursor to render query
-    cur, conn = connectMySql()
-
-    #cur.execute(query)
-
-    #result = cur.fetchall()
-
-    #important close connection, after recieving data!
-    cur.close()
-    conn.close()
-    return render_template('messenger.html')
+def Messenger():
+    return render_template(MESSENGER_PAGE)
 
 @app.route('/Notifications')
-def notifications():
-    #query = "SELECT TITLE FROM MOVIE"
-
-    #get cursor to render query
-    cur, conn = connectMySql()
-
-    #cur.execute(query)
-
-    #result = cur.fetchall()
-
-    #important close connection, after recieving data!
-    cur.close()
-    conn.close()
-    return render_template('notifications.html')
+def Notifications():
+    return render_template(NOTIFICATION_PAGE)
 
 @app.route('/Search')
-def search():
-    #query = "SELECT TITLE FROM MOVIE"
-
-    #get cursor to render query
-    cur, conn = connectMySql()
-
-    #cur.execute(query)
-
-    #result = cur.fetchall()
-
-    #important close connection, after recieving data!
-    cur.close()
-    conn.close()
-    return render_template('search.html')
+def Search():
+    return render_template(SEARCH_PAGE)
 
 @app.route('/Groups')
-def groups():
-    #query = "SELECT TITLE FROM MOVIE"
-
-    #get cursor to render query
-    cur, conn = connectMySql()
-
-    #cur.execute(query)
-
-    #result = cur.fetchall()
-
-    #important close connection, after recieving data!
-    cur.close()
-    conn.close()
-    return render_template('groups.html')
+def Groups():
+    return render_template(GROUPS_PAGE)
 
 @app.route('/CreateUser')
-def createUser():
+def CreateUser():
     username = request.cookies.get('username')
     createMsg = 'Enter unique user credentials'
 
-    return render_template('create_user.html',username = username, createMsg = createMsg)
+    return render_template(CREATE_USER_PAGE, username = username, createMsg = createMsg)
 
 @app.route('/CreateUserAuth', methods= ['POST', 'GET'])
-def createUserAuth():
+def CreateUserAuth():
     if request.method == 'POST':
       
       username = request.form['username']
@@ -110,7 +73,7 @@ def createUserAuth():
 
       query = 'SELECT * FROM user WHERE username = \'' + username +'\' AND password = \'' + password + '\''
 
-      cur, conn = connectMySql()
+      cur, conn = ConnectMySql()
 
       #get cursor to render query
       cur.execute(query)
@@ -125,10 +88,10 @@ def createUserAuth():
         username = request.cookies.get('username')
         
         if username:
-            return make_response(render_template('create_user.html', username = username, createMsg = 'User already exists, try again'))
+            return make_response(render_template(CREATE_USER_PAGE, username = username, createMsg = 'User already exists, try again'))
         else:
-            username = 'Not Logged in'
-            return make_response(render_template('create_user.html', username = username, createMsg = 'User already exists, try again'))
+            username = NOT_LOGGED_IN
+            return make_response(render_template(CREATE_USER_PAGE, username = username, createMsg = 'User already exists, try again'))
 
       else:
         #user was not found in database, insert into users table, set user in cookie, render custom page
@@ -137,7 +100,7 @@ def createUserAuth():
 
         query = 'INSERT INTO user (username, password) VALUES (\'' + username + '\', \'' + password + '\')'
 
-        cur, conn = connectMySql()
+        cur, conn = ConnectMySql()
 
         #get cursor to render query
         cur.execute(query)
@@ -145,7 +108,7 @@ def createUserAuth():
         #commit changes to the database
         conn.commit()
 
-        resp = make_response(render_template('index.html', username = username))
+        resp = make_response(render_template(INDEX_PAGE, username = username))
         resp.set_cookie('username', username)
 
         #important close connection, after recieving data!
@@ -153,33 +116,15 @@ def createUserAuth():
         conn.close()
 
         return resp
-        
-    
-    
-    
-    #query = "SELECT TITLE FROM MOVIE"
-
-    #get cursor to render query
-    cur, conn = connectMySql()
-
-    #cur.execute(query)
-
-    #result = cur.fetchall()
-
-    #important close connection, after recieving data!
-    cur.close()
-    conn.close()
-    return render_template('create_user.html')
 
 @app.route('/Login')
-def login():
-
+def Login():
     username = request.cookies.get('username')
     loginMsg = 'Enter Login Credentials'
-    return  render_template('login.html', username = username, loginMsg = loginMsg)
+    return  render_template(LOGIN_PAGE, username = username, loginMsg = loginMsg)
 
 @app.route('/LoginAuth', methods= ['POST', 'GET'])
-def loginAuth():
+def LoginAuth():
     if request.method == 'POST':
       
       username = request.form['username']
@@ -187,7 +132,7 @@ def loginAuth():
 
       query = 'SELECT * FROM user WHERE username = \'' + username +'\' AND password = \'' + password + '\''
 
-      cur, conn = connectMySql()
+      cur, conn = ConnectMySql()
 
       #get cursor to render query
       cur.execute(query)
@@ -197,7 +142,7 @@ def loginAuth():
       if len(result) > 0:
         #user was found in database, set user in cookie and render custom page
         username = request.form['username']
-        resp = make_response(render_template('index.html', username = username))
+        resp = make_response(render_template(INDEX_PAGE, username = username))
         resp.set_cookie('username', username)
 
         #important close connection, after recieving data!
@@ -210,24 +155,14 @@ def loginAuth():
         username = request.cookies.get('username')
 
         if username:
-            return make_response(render_template('login.html', username = username, loginMsg = 'Invalid Login Credentials'))
+            return make_response(render_template(LOGIN_PAGE, username = username, loginMsg = 'Invalid Login Credentials'))
         else:
-            username = 'Not Logged in'
-            return make_response(render_template('login.html', username = username, loginMsg = 'Invalid Login Credentials'))
+            username = NOT_LOGGED_IN
+            return make_response(render_template(LOGIN_PAGE, username = username, loginMsg = 'Invalid Login Credentials'))
 
 
-#____ O R A C L E  C O N N E C T I O N _____
-def connectMySql():
-    
-    #Pull user name and password from text files
-    #oracleUsername = ""
-    #oraclePassword = ""
-    #with open("Credentials/username.txt") as f:
-    #    oracleUsername = f.readline()
-    #with open("Credentials/password.txt") as f:
-    #    oraclePassword = f.readline()
-
-    #Create a connection
+#____ M Y S Q L  C O N N E C T I O N _____
+def ConnectMySql():
 
     conn = mysql.connector.connect(
     host = "localhost",
@@ -246,5 +181,5 @@ def connectMySql():
 
 # Main entry point for application
 if __name__ == "__main__":
-    connectMySql()
+    ConnectMySql()
     app.run(debug=True)
