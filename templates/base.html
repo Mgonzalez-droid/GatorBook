@@ -21,9 +21,9 @@
         </header>
     </div>
     <div id="login_bar">
-        <a href = "{{ url_for('login') }}">Login | </a>
-        <a href = "{{ url_for('login') }}">Logout | </a>
-        <a href = "{{ url_for('createUser') }}">Create User | </a>
+        <a href = "{{ url_for('Login') }}">Login | </a>
+        <a href = "{{ url_for('Login') }}">Logout | </a>
+        <a href = "{{ url_for('CreateUser') }}">Create User | </a>
         <a>{{username}}</a>
     </div>
 <div>
@@ -36,28 +36,22 @@
             </div>
         </div>
         <div class = "nav_mid">
-            <a href = "{{ url_for('index') }}" class = "icon">
+            <a href = "{{ url_for('Index') }}" class = "icon">
                 <i class = "material-icons">home</i>
             </a>
-        <a href = "{{ url_for('groups') }}" class = "icon">
+        <a href = "{{ url_for('Groups') }}" class = "icon">
                 <i class = "material-icons">people-outline</i>
 
             </a>
         </div>
         <div class= "nav_right">
             <div class="buttons">
-                <a href="{{ url_for('messenger') }}"> 
+                <a href="{{ url_for('Messenger') }}"> 
                     <i class="material-icons">message</i>
                 </a>
 
-                <a href="{{ url_for('notifications') }}">
+                <a href="{{ url_for('Notifications') }}">
                     <i class="material-icons">notifications</i>
-                    {% set new_messages = current_user.new_messages() %}
-                    <span id="message_count" class="badge"
-                          style="visibility: {% if new_messages %}visible
-                                             {% else %}hidden {% endif %};">
-                        {{ new_messages }}
-                    </span>
                 </a>
             </div>
         </div>
