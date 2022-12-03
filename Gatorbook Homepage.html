@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang ="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width"/>
+      <link href="../static/css/layout.css" rel = "stylesheet" />
+      <meta charset="UFT-8">
+      <meta name = "viewport" content = "width = device-width initial-scale = 1.0">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <title> Gatorbook Homepage </title>
+    </head>
         <body>
 
             <form action="info.php" method="post">
-            <h3> Gatorbook </h3>
+              <header id = "header">
+              <center>
+                  <h1>GatorBook</h1>
+              </center>
+            </header>
+            <div>
+            <center>
             <textarea id="text" name="body" placeholder="Share what's on your mind:" class="longInput" cols="30" rows="10"></textarea>
 
                 <button for="post" name="add post">Add Post</button>
+            </center>
+          </div>
             </form>
         </body>
     </head>

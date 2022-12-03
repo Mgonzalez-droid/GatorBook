@@ -18,7 +18,7 @@ $conn = mysqli_connect($host, $username, $password, $dbname);
 if (mysqli_connect_errno()) {
   die("Connection Error: " . mysqli_connect_error());
 }
-$sample_username = "johndoe";
+$sample_username = "johndoe2";
 $sql_1 = "SELECT * FROM user WHERE username = '$sample_username'";
 $result = mysqli_query($conn, $sql_1);
 if (mysqli_num_rows($result) > 0) {
